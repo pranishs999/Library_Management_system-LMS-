@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center min-h-[50vh]">
+    <h2 class="text-xl font-bold mb-2 text-blue-700">Welcome to the Library Management System</h2>
+    <p class="text-xs text-gray-700 mb-4">Manage books, patrons, and borrow records with ease.</p>
+    <div class="flex flex-wrap gap-2">
+        <a href="{% url 'dashboard' %}" class="px-4 py-1.5 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition text-xs">Dashboard</a>
+        <a href="{% url 'book_list' %}" class="px-4 py-1.5 bg-green-600 text-white rounded shadow hover:bg-green-700 transition text-xs">Books</a>
+        <a href="{% url 'patron_list' %}" class="px-4 py-1.5 bg-yellow-500 text-white rounded shadow hover:bg-yellow-600 transition text-xs">Patrons</a>
+        <a href="{% url 'borrow_list' %}" class="px-4 py-1.5 bg-purple-600 text-white rounded shadow hover:bg-purple-700 transition text-xs">Borrow Records</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto mt-6">
+    <h2 class="text-base font-semibold mb-3">Patron List</h2>
+    <div class="bg-white border border-gray-200 rounded shadow-sm">
+        <div class="flex font-semibold bg-gray-100 px-2 py-1 text-xs">
+            <div class="flex-1">Name</div>
+            <div class="flex-1">Email</div>
+            <div class="flex-1">Actions</div>
+        </div>
+        {% for patron in patrons %}
+        <div class="flex border-t px-2 py-1 items-center hover:bg-gray-50 transition">
+            <div class="flex-1 truncate">{{ patron.first_name }} {{ patron.last_name }}</div>
+            <div class="flex-1 truncate">{{ patron.email }}</div>
+            <div class="flex-1 space-x-1">
+                <a href="{% url 'edit_patron' patron.pk %}" class="text-blue-600 hover:underline text-xs">Edit</a>
+                <a href="{% url 'delete_patron' patron.pk %}" class="text-red-600 hover:underline text-xs">Delete</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="px-2 py-4 text-center text-gray-400 text-xs">No patrons found.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

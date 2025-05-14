@@ -12,7 +12,6 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-
 class Patron(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -20,21 +19,21 @@ class Patron(models.Model):
     membership_id = models.CharField(max_length=10, unique=True, blank=True, editable=False)
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Save first to get an ID
         if not self.membership_id:
+            super().save(*args, **kwargs)  # Save first to get an ID
             self.membership_id = str(self.id).zfill(5)
             super().save(update_fields=["membership_id"])
-
+        else:
+            super().save(*args, **kwargs)
+    
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
+        return f"{self.membership_id} {self.first_name} {self.last_name}"
 
 class Borrow(models.Model):
     patron = models.ForeignKey(Patron, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    borrow_date = models.DateField(auto_now_add=True)
+    borrow_date = models.DateField()  
     return_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.patron} borrowed {self.book.title} on {self.borrow_date}"
-    

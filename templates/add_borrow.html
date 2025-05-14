@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-base font-semibold text-gray-800 mb-2">Borrow Book</h2>
+    <form method="post" class="space-y-3">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs">Borrow</button>
+    </form>
+</div>
+{% endblock %}
